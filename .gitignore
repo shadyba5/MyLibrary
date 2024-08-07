@@ -8,29 +8,29 @@
 # Ignore build output directories
 bin/
 obj/
+Debug/
+Release/
 
-# Ignore temporary files
+# Ignore intermediate build files
+*.gch
+*.pch
+*.pdb
+*.d
+
+# Ignore temporary and backup files
 *.log
 *.tmp
 *.swp
 *.bak
 
-# Ignore Mac system files
+# Ignore system files
 .DS_Store
-
-# Ignore Windows system files
 Thumbs.db
 ehthumbs.db
 
 # Ignore IDE specific files (e.g., JetBrains, Eclipse)
 .idea/
 *.iml
-
-# Ignore other generated files
-*.gch
-*.pch
-*.pdb
-*.d
 
 # Ignore test and coverage files
 *.gcda
@@ -58,5 +58,5 @@ ehthumbs.db
 # Ignore node_modules for JavaScript projects (if applicable)
 node_modules/
 
-# Ignore custom files and folders
+# Ignore additional custom files or directories
 # Add other patterns specific to your project or environment
