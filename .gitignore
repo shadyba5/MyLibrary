@@ -1,0 +1,62 @@
+# Ignore Visual Studio specific files and directories
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore build output directories
+bin/
+obj/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
+ehthumbs.db
+
+# Ignore IDE specific files (e.g., JetBrains, Eclipse)
+.idea/
+*.iml
+
+# Ignore other generated files
+*.gch
+*.pch
+*.pdb
+*.d
+
+# Ignore test and coverage files
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+
+# Ignore package manager files
+*.tgz
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Ignore compiled dynamic libraries
+*.dll
+*.so
+*.dylib
+
+# Ignore compiled static libraries
+*.lib
+*.a
+
+# Ignore node_modules for JavaScript projects (if applicable)
+node_modules/
+
+# Ignore custom files and folders
+# Add other patterns specific to your project or environment
