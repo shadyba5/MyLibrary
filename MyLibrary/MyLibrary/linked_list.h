@@ -2,6 +2,8 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <stdexcept>
+#include <iostream>
 
 template<typename T>
 class Node {
@@ -34,11 +36,9 @@ public:
 	bool isEmpty() const;
 	int size() const;
 
-
 private:
 	Node<T>* head;
 	int length;
-
 
 	void pushFront(const T& data);
 	void pushBack(const T& data);
@@ -46,12 +46,7 @@ private:
 	void popBack();
 	void clear();
 	void copy_from(const LinkedList& other);
-
 };
-
-#include "linked_list.h"
-#include <stdexcept>
-#include <iostream>
 
 using namespace std;
 

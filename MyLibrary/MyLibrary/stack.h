@@ -34,10 +34,6 @@ public:
 private:
 	Node<T>* top;
 	int length;
-
-	
-	
-
 };
 
 template<typename T>
@@ -79,8 +75,6 @@ inline void stack<T>::push(T item)
 	catch (const std::bad_alloc& e) {
 		throw std::runtime_error("stack push failed to allocate a new node!" + std::string(e.what()));
 	}
-		
-	
 }
 
 template<typename T>
@@ -95,6 +89,7 @@ inline T stack<T>::pop()
 	top = toDelete->prev;
 	delete toDelete;
 	length--;
+
 	if (length == 0){
 		top = nullptr;
 	}
@@ -108,6 +103,7 @@ inline T& stack<T>::peak()
 	if (top == nullptr) {
 		throw std::runtime_error("Stack is empty");
 	}
+
 	return top->data;
 }
 
