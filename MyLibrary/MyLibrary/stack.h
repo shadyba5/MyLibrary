@@ -15,20 +15,20 @@ public:
 };
 
 template<typename T>
-class stack {
+class Stack {
 public:
-	stack(); // Default constructor
-	~stack(); // Destructor
+	Stack(); // Default constructor
+	~Stack(); // Destructor
 
-	stack(const stack& other); // Copy constructor
-	stack& operator=(const stack& other); // Copy assignment operator
+	Stack(const Stack& other); // Copy constructor
+	Stack& operator=(const Stack& other); // Copy assignment operator
 
 	void push(T item);
 	T pop();
 	T& peak();
 	bool is_empty();
 	int size();
-	void copyFrom(const stack<T>& other);
+	void copyFrom(const Stack<T>& other);
 	void clear();
 
 private:
@@ -37,20 +37,20 @@ private:
 };
 
 template<typename T>
-inline stack<T>::stack() : top(nullptr), length(0){}
+inline Stack<T>::Stack() : top(nullptr), length(0){}
 
 template<typename T>
-inline stack<T>::~stack() {
+inline Stack<T>::~Stack() {
 	clear();
 }
 
 template <typename T>
-stack<T>::stack(const stack& other) {
+Stack<T>::Stack(const Stack& other) {
 	copyFrom(other);
 }
 
 template <typename T>
-stack<T>& stack<T>::operator=(const stack& other) {
+Stack<T>& Stack<T>::operator=(const Stack& other) {
 	if (this != &other) {
 		clear();
 		copyFrom(other);
@@ -59,7 +59,7 @@ stack<T>& stack<T>::operator=(const stack& other) {
 }
 
 template<typename T>
-inline void stack<T>::push(T item)
+inline void Stack<T>::push(T item)
 {	
 	try {
 		Node<T>* newNode = new Node<T>(item);
@@ -78,7 +78,7 @@ inline void stack<T>::push(T item)
 }
 
 template<typename T>
-inline T stack<T>::pop()
+inline T Stack<T>::pop()
 {
 	if (top == nullptr) {
 		throw std::runtime_error("Stack is empty");
@@ -98,7 +98,7 @@ inline T stack<T>::pop()
 }
 
 template<typename T>
-inline T& stack<T>::peak()
+inline T& Stack<T>::peak()
 {
 	if (top == nullptr) {
 		throw std::runtime_error("Stack is empty");
@@ -108,19 +108,19 @@ inline T& stack<T>::peak()
 }
 
 template<typename T>
-inline bool stack<T>::is_empty()
+inline bool Stack<T>::is_empty()
 {
 	return length == 0;
 }
 
 template<typename T>
-inline int stack<T>::size()
+inline int Stack<T>::size()
 {
 	return length;
 }
 
 template<typename T>
-inline void stack<T>::clear()
+inline void Stack<T>::clear()
 {
 	if (top == nullptr) {
 		return;
@@ -133,7 +133,7 @@ inline void stack<T>::clear()
 }
 
 template<typename T>
-inline void stack<T>::copyFrom(const stack<T>& other)
+inline void Stack<T>::copyFrom(const Stack<T>& other)
 {	
 	clear();
 

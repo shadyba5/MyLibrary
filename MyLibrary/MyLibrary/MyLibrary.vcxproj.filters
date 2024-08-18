@@ -20,15 +20,18 @@
     <ClInclude Include="stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="linked_list.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test_linked_list.cpp">
       <Filter>tests</Filter>
     </ClCompile>
     <ClCompile Include="test_stack.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_queue.cpp">
       <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
