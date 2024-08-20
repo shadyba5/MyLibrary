@@ -23,6 +23,9 @@
     <ClInclude Include="queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_linked_list.cpp">
@@ -32,6 +35,9 @@
       <Filter>tests</Filter>
     </ClCompile>
     <ClCompile Include="test_queue.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_vector.cpp">
       <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>

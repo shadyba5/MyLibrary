@@ -37,9 +37,9 @@ public:
 	bool exists(T item) const;
 	const T& get(int index) const;
 	int size() const;
-	void resize(int newSize);
+	void resize(int newSize);	//resizes the vector to newSize, if the newSize is smaller than the cuurent one it cuts the diffirence elements from the end.
 
-	void clear();
+	void clear(); //RESETES THE VECTOR TO INTIAL STATE WHERE IT HAS A STARTING CAPACITY BUT IS EMPTY.
 	void copyFrom(const Vector& other);
 
 private:
@@ -51,7 +51,7 @@ private:
 
 template<typename T>
 inline Vector<T>::Vector()
-{
+{	
 	length = 0;
 	data = new T[STARTING_CAPACITY];
 	capacity = STARTING_CAPACITY;
@@ -86,77 +86,89 @@ inline Vector<T>& Vector<T>::operator=(const Vector& other)
 template<typename T>
 inline void Vector<T>::append(T item)
 {
-	if (length < capacity) {
-		data[length] = item;
-	}
-	else {
-		capacity *= 2;
-		T* newData = new T[capacity];
-		for (int i = 0; i < length; i++) {
-			newData[i] = data[i];
+	try {
+		if (length < capacity) {
+			data[length] = item;
 		}
-		delete data;
-		data = newData;
+		else {
+			capacity *= 2;
+			T* newData = new T[capacity];
+			for (int i = 0; i < length; i++) {
+				newData[i] = data[i];
+			}
+			delete[] data;
+			data = newData;
+		}
+		length++;
 	}
-	length++;
-}
+	catch (const std::bad_alloc& e) {
+		throw std::runtime_error("vector append failed to allocate new memory!" + std::string(e.what()));
+	}
 
+}
 
 template<typename T>
 inline void Vector<T>::insert(int index, T item)
 {
-	if (index >= length) {
+	if (index > length || index < 0) {  // Ensure the index is within bounds
 		throw std::runtime_error("index out of bound!");
 	}
-	if (length < capacity) {
-		for (int i = length - 1; i >= index; i--) {
-			data[i + 1] = data[i];
-		}
-		data[index] = item;
-	}
-	else {
-		capacity *= 2;
-		T* newData = new T[capacity];
-		for (int i = 0; i < length+1; i++) {
-			if (i < index) {
+
+	try {
+		// Resize if necessary
+		if (length >= capacity) {
+			capacity *= 2;
+			T* newData = new T[capacity];
+			for (int i = 0; i < length; i++) {
 				newData[i] = data[i];
-				continue;
 			}
-			if (i == index) {
-				newData[i] = item;
-				continue;
-			}
-			if (i > index) {
-				newData[i + 1] = data[i];
-			}
+			delete[] data;
+			data = newData;
 		}
-		delete data;
-		data = newData;
+
+		// Shift elements to the right starting from the end to the index
+		for (int i = length; i > index; i--) {
+			data[i] = data[i - 1];
+		}
+
+		// Insert the new item at the specified index
+		data[index] = item;
+		length++;
 	}
-	length++;
+	catch (const std::bad_alloc& e) {
+		throw std::runtime_error("vector insert failed to allocate new memory!" + std::string(e.what()));
+	}
+
 }
+
 
 
 template<typename T>
 inline void Vector<T>::remove(int index)
 {
-	if (index >= length) {
+	if (index >= length || index < 0) {
 		throw std::runtime_error("index out of bound!");
 	}
-	for (int i = index; i < length; i++) {
-		data[i] = data[i + 1];
-	}
-	length--;
-	if (length <= capacity / 4) {
-		capacity /= 2;
-		T* newData = new T[capacity];
-		for (size_t i = 0; i < length; i++)
-		{
-			newData[i] = data[i];
+	try {
+		for (int i = index; i < length-1; i++) {
+			data[i] = data[i + 1];
 		}
-		delete data;
-		data = newData;
+		length--;
+		if (length <= capacity / 4) {
+			capacity /= 2;
+			T* newData = new T[capacity];
+			for (size_t i = 0; i < length; i++)
+			{
+				newData[i] = data[i];
+			}
+			delete[] data;
+			data = newData;
+		}
 	}
+	catch (const std::bad_alloc& e) {
+		throw std::runtime_error("Vector Remove failed to allocate new memory" + std::string(e.what()));
+	}
+
 }
 
 template<typename T>
@@ -174,7 +186,7 @@ inline bool Vector<T>::exists(T item) const
 template<typename T>
 inline const T& Vector<T>::get(int index) const
 {
-	if (index < length) {
+	if (index < length && index >= 0) {
 		return data[index];
 	}
 	else {
@@ -193,13 +205,44 @@ inline int Vector<T>::size() const
 template<typename T>
 inline void Vector<T>::resize(int newSize)
 {
-
+	if (newSize == length) {
+		return;
+	}
+	try {
+		T* newData = new T[2 * newSize];
+		if (newSize > length) {
+			for (int i = 0; i < length; i++) {
+				newData[i] = data[i];
+			}
+		}
+		else {
+			for (int i = 0; i < newSize; i++) {
+				newData[i] = data[i];
+			}
+		}
+		delete[] data;
+		data = newData;
+		capacity = 2 * newSize;
+		length = newSize;
+	}
+	catch (const std::bad_alloc& e) {
+		throw std::runtime_error("vector resize failed to allocate new memory!" + std::string(e.what()));
+	}
 }
 
 
 template<typename T>
 inline void Vector<T>::clear()
-{
+{	
+	try {
+		delete[] data;
+		length = 0;
+		capacity = STARTING_CAPACITY;
+		data = new T[STARTING_CAPACITY];
+	}
+	catch (const std::bad_alloc& e) {
+		throw std::runtime_error("clear failed to allocate new memory!" + std::string(e.what()));
+	}
 
 }
 
@@ -207,5 +250,18 @@ inline void Vector<T>::clear()
 template<typename T>
 inline void Vector<T>::copyFrom(const Vector<T>&  other)
 {
-
+	try {
+		length = other.length;
+		capacity = other.capacity;
+		data = new T[capacity];
+		for (size_t i = 0; i < length; i++)
+		{
+			data[i] = other.data[i];
+		}
+		return;
+	}
+	catch (const std::bad_alloc& e) {
+		throw std::runtime_error("copyFrom failed to allocate new memory!" + std::string(e.what()));
+	}
+	
 }
