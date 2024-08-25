@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="linked_list.h" />
+    <ClInclude Include="max_heap.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="vector.h" />
