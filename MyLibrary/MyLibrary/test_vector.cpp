@@ -204,7 +204,7 @@ void testCopyFrom() {
 
     std::cout << "testCopyFrom passed!" << std::endl;
 }
-
+/*
 int main() {
     testAppend();
     testInsert();
@@ -218,3 +218,4 @@ int main() {
     std::cout << "All tests passed!" << std::endl;
     return 0;
 }
+*/

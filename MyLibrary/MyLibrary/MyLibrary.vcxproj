@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_linked_list.cpp" />
+    <ClCompile Include="test_max_heap.cpp" />
     <ClCompile Include="test_queue.cpp" />
     <ClCompile Include="test_stack.cpp" />
     <ClCompile Include="test_vector.cpp" />
