@@ -29,6 +29,9 @@
     <ClInclude Include="max_heap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hash_table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_linked_list.cpp">

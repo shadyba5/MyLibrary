@@ -93,9 +93,10 @@ void testAll() {
     testSingleElementHeap();
     testDuplicateElements();
 }
-
+/**/
 int main() {
     testAll();
     std::cout << "All tests passed!" << std::endl;
     return 0;
 }
+*/
